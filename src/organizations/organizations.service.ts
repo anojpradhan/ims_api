@@ -49,6 +49,13 @@ export class OrganizationsService {
   private async getOrganization(id: number) {
     const existOrganization = await this.prismaService.organization.findFirst({
       where: { id },
+      include: {
+        users: {
+          include: {
+            role: true,
+          }
+        },
+      }
     });
     if (!existOrganization) {
       throw new NotFoundException(`Id ${id} Not Found`);
