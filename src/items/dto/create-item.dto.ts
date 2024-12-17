@@ -5,8 +5,9 @@ export class CreateItemDto {
   @IsNotEmpty()
   name: string;
   @IsNotEmpty()
+  @IsOptional()
   @IsNumber()
-  quantity: number;
+  quantity?: number;
   @IsOptional()
   @IsString()
   description?: string;

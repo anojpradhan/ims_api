@@ -20,10 +20,13 @@ export class ItemsController {
     createItemDto.organization_id= request.payload.organization_id;
     return this.itemsService.create(createItemDto);
   }
-
+  // @Get()
+  // findAll(@Req() request: JwtPayload) {
+  //   return this.itemsService.findAll(request.payload.organization_id);
+  // }
   @Get()
-  findAll() {
-    return this.itemsService.findAll();
+  findAll(@Req() request: JwtPayload) {
+    return this.itemsService.findAll(request.payload.organization_id);
   }
 
   @Get(':id')

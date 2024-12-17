@@ -12,7 +12,7 @@ export class OrganizationsService {
   constructor(private readonly prismaService: PrismaService) {}
   async create(createOrganizationDto: CreateOrganizationDto) {
     await this.checkOrganizationExists(createOrganizationDto.name);
-    return this.prismaService.organization.create({data:createOrganizationDto,});
+    return this.prismaService.organization.create({data:createOrganizationDto});
     // return this.prismaService.organization.create({
     //   data: {
     //     name: createOrganizationDto.name,
