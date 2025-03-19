@@ -25,22 +25,24 @@ export class ItemsController {
   //   return this.itemsService.findAll(request.payload.organization_id);
   // }
   @Get()
-  findAll(@Req() request: JwtPayload) {
-    return this.itemsService.findAll(request.payload.organization_id);
+  findAll(@Req() requests: JwtPayload) {
+    return this.itemsService.findAll(requests.payload.organization_id);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.itemsService.findOne(+id);
+  findOne(@Param('id') id: string, @Req() requests:JwtPayload) {
+    return this.itemsService.findOne(+id, requests.payload.organization_id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto) {
+  update(@Param('id') id: string, @Body() updateItemDto: UpdateItemDto, @Req() requests:JwtPayload) {
+    // console.log("controller");
+    updateItemDto.organization_id=requests.payload.organization_id;
     return this.itemsService.update(+id, updateItemDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.itemsService.remove(+id);
+  remove(@Param('id') id: string, @Req() request:JwtPayload) {
+    return this.itemsService.remove(+id, request.payload.organization_id);
   }
 }
